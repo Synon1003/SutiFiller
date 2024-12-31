@@ -1,0 +1,60 @@
+﻿@using System
+@using System.Globalization
+@using Microsoft.AspNetCore.Http;
+@using SutiFiller.Web.Models
+
+@model Suti
+
+@if (Model == null)
+{
+    <div class="contentText">A süti nem található.</div>
+}
+else
+{
+    <div class="sutiItemHead">@Model.Name</div>
+    <div class="sutiItemContent">
+        <table width="600">
+            <tr>
+                <td>
+                    <strong>Kategória:</strong> @Model.Category.Name
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Ár:</strong> @Model.Price ft
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="contentComment">
+                        <strong>Leírás:</strong> @Model.Description
+                    </div>
+                </td>
+            </tr>
+            @if (ViewBag.Images != null && ViewBag.Images.Count > 0)
+            {
+                <tr>
+                    <td>
+                        <div class="contentComment">
+                            <strong>Képek:</strong><br />
+                            @foreach (Int32 id in ViewBag.Images)
+                            {
+                                <a asp-action="Image" asp-route-imageId="@id" asp-route-large="true" target="_blank">
+                                    <img src="@Url.Action("Image", new { imageId = id })" class="contentImage" />
+                                </a>
+                            }
+                        </div>
+                    </td>
+                </tr>
+            }
+            @if (Context.Session.GetString("user") != null)
+            {
+                <tr>
+                    <td>
+                        <a asp-controller="Order" asp-action="Add" asp-route-sutiId="@Model.Id" class="sutiOrderLink"><strong>Megrendelem</strong></a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+}

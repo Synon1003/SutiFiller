@@ -1,0 +1,36 @@
+﻿@using System.Collections.Generic
+@using SutiFiller.Web.Models
+
+@model OrderViewModel
+
+<div>
+    <div class="orderItemHead">Kosár tartalma</div>
+    <div class="orderItemContent">
+        <strong>VégÖsszeg:</strong> @Model.Order.TotalPrice<br />
+        <strong>Rendelt sütik:</strong> @Model.Order.SutiOrders.Sum(so => so.Quantity)<br />
+    </div>
+
+    <table>
+        @foreach (var item in Model.Order.SutiOrders)
+        {
+            <tr class="sutiItem">
+                <td>
+                    <img src="@Url.Action("ImageForSuti", "Home", new {sutiId = @item.Suti.Id})" class="contentImage" />
+                </td>
+                <td>
+                    <div class="sutiItemHead">
+                        <a asp-controller="Home" asp-action="Details" asp-route-sutiId="@item.Suti.Id">@item.Suti.Name</a>
+                    </div>
+                    <div class="sutiItemContent">
+                        <strong>Kategória: </strong>@item.Suti.Category.Name<br />
+                        <strong>Ár: </strong>@item.Suti.Price<br />
+                        <strong>Mennyiség: </strong>@item.Quantity<br />
+                        <strong>Összár: </strong>@item.AllInPrice<br />
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+    <br />
+    <a asp-controller="Order" asp-action="Show" asp-route-orderId="@Model.Order.Id" class="contentLink">Tovább a rendeléshez</a>
+</div>

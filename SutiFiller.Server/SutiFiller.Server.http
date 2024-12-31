@@ -1,0 +1,6 @@
+@SutiFiller.Server_HostAddress = http://localhost:5015
+
+GET {{SutiFiller.Server_HostAddress}}/api/sutis/
+Accept: application/json
+
+###

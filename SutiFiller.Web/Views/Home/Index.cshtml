@@ -1,0 +1,36 @@
+﻿@using SutiFiller.Web.Models
+
+@model IList<Suti>
+@if (Model == null || !Model.Any())
+{
+    <div class="contentText">Jelenleg nem található süti.</div>
+}
+else
+{
+    <table>
+        @for (Int32 i = 0; i < (Model.Count + 1) / 2; i++)
+        {
+            <tr>
+                @for (Int32 j = i * 2; j < i * 2 + 2 && j < Model.Count; j++)
+                {
+                    <td>
+                        <table border="0" width="300">
+                            <tr class="sutiItem">
+                                <img src="@Url.Action("ImageForSuti", new { sutiId = Model[j].Id })" class="contentImageList" />
+                                <td>
+                                    <div class="sutiItemHead">
+                                        <a asp-action="Details" asp-route-sutiId="@Model[j].Id">@Model[j].Name</a>
+                                    </div>
+                                    <div class="sutiItemContent">
+                                        <strong>Kategória: </strong>@Model[j].Category.Name<br />
+                                        <strong>Leírás: </strong>@Html.Raw(Model[j].Description?.Split('.').FirstOrDefault() + ".")
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                }
+            </tr>
+        }
+    </table>
+}

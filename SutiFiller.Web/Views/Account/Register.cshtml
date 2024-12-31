@@ -1,0 +1,78 @@
+﻿@using SutiFiller.Web.Models;
+
+@model RegistrationViewModel
+<form asp-controller="Account" asp-action="Register">
+    <div class="failureNotification">@Html.ValidationSummary(true, "A regisztráció sikertelen!")</div>
+    <h3>
+        Személyes adatok:
+    </h3>
+
+    <table>
+        <tr>
+            <td>
+                Név:
+            </td>
+            <td colspan="2">
+                <input asp-for="GuestName" />
+                <span asp-validation-for="GuestName" class="failureNotification"></span>
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                Számlázási cím:
+            </td>
+            <td colspan="2">
+                <input asp-for="GuestAddress" />
+                <span asp-validation-for="GuestAddress" class="failureNotification"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Telefonszám:
+            </td>
+            <td colspan="2">
+                <input asp-for="GuestPhoneNumber" />
+                <span asp-validation-for="GuestPhoneNumber" class="failureNotification"></span>
+            </td>
+        </tr>
+    </table>
+
+    <h3>Bejelentkezési adatok</h3>
+        
+    <table>
+        <tr>
+            <td>
+                Felhasználónév:
+            </td>
+            <td>
+                <input asp-for="UserName" />
+            <span asp-validation-for="UserName" class="failureNotification"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Jelszó:
+            </td>
+            <td>
+                <input asp-for="UserPassword" />
+            <span asp-validation-for="UserPassword" class="failureNotification"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Jelszó megismétlése:
+            </td>
+            <td>
+                <input asp-for="UserConfirmPassword" />
+            <span asp-validation-for="UserConfirmPassword" class="failureNotification"></span>
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="Regisztráció" class="button" />
+</form>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

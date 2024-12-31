@@ -1,0 +1,43 @@
+﻿@using SutiFiller.Web.Models;
+
+@model LoginViewModel
+<form asp-controller="Account" asp-action="Login">
+    <h3>Bejelentkezési adatok</h3>
+
+    <table>
+        <tr>
+            <td colspan="2">
+                <div class="failureNotification">@ViewBag.Information</div>
+                <div asp-validation-summary="ModelOnly" class="failureNotification"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Felhasználónév:
+            </td>
+            <td>
+                <input asp-for="UserName" />
+                <span asp-validation-for="UserName" class="failureNotification"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Jelszó:
+            </td>
+            <td>
+                <input asp-for="UserPassword" />
+                <span asp-validation-for="UserPassword" class="failureNotification"></span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="Bejelentkezés" class="button" />
+            </td>
+        </tr>
+    </table>
+</form>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

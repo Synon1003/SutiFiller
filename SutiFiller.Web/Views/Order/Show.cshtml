@@ -1,0 +1,57 @@
+﻿@using SutiFiller.Web.Models;
+
+@model OrderViewModel
+
+<div class="orderItemHead">Rendelési adatok</div>
+<div>
+    <div class="orderItemContent">
+        <strong>VégÖsszeg:</strong> @Model.Order.TotalPrice ft<br />
+        <strong>Rendelt sütik:</strong> @Model.Order.SutiOrders.Sum(so => so.Quantity)<br />
+    </div>
+
+
+    <form asp-controller="Order" asp-action="Index" asp-route-orderId="@Model.Order.Id">
+        <div class="orderItemHead">Személyes adatok</div>
+        <table>
+            <tr>
+                <td>
+                    Név:
+                </td>
+                <td>
+                    <input asp-for="GuestName" />
+                    <span asp-validation-for="GuestName" class="failureNotification"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Számlázási cím:
+                </td>
+                <td >
+                    <input asp-for="GuestAddress" />
+                    <span asp-validation-for="GuestAddress" class="failureNotification"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Telefonszám:
+                </td>
+                <td>
+                    <input asp-for="GuestPhoneNumber" />
+                    <span asp-validation-for="GuestPhoneNumber"  class="failureNotification"></span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="Rendelés" class="button" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+@section Scripts
+{
+    @{
+        Html.RenderPartial("_ValidationScriptsPartial");
+    }
+}
